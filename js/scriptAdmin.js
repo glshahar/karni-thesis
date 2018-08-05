@@ -1,7 +1,7 @@
 'use strict';
 
-var appUrl = "http://localhost:3000/";
-// var appUrl = "https://karni-thesis-server.herokuapp.com/";
+// var appUrl = "http://localhost:3000/";
+var appUrl = "https://karni-thesis-server.herokuapp.com/";
 
 var app = angular.module('app', ['LocalStorageModule']);
 
