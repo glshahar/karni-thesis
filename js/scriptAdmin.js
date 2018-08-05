@@ -1,7 +1,7 @@
 'use strict';
 
-// var appUrl = "http://localhost:3000/";
-var appUrl = "https://karni-thesis-server.herokuapp.com/";
+var appUrl = "http://localhost:3000/";
+// var appUrl = "https://karni-thesis-server.herokuapp.com/";
 
 var app = angular.module('app', ['LocalStorageModule']);
 
@@ -9,11 +9,12 @@ app.controller('appCtrl', function($scope, $http, $timeout, $sce, localStorageSe
     console.log("Karni - Admin Ctrl");
     $scope.posts = [];
     $scope.noTimes = 0;
+    $scope.numOfWords = 0;
 
     $scope.getNewPosts = function () {
         $http({
             method : "GET",
-            url : appUrl+"getPosts10"
+            url : appUrl+"getPostsInn"
         }).then(function (response) {
             console.log("get all posts Done successfully !");
             // console.log("JSON: "+JSON.stringify(response.data, null, 4));
@@ -27,6 +28,7 @@ app.controller('appCtrl', function($scope, $http, $timeout, $sce, localStorageSe
         $scope.posts = [];
         $scope.searchKeyword = "";
         $scope.searchInput = "";
+
         // get all Posts
         $http({
             method : "POST",
@@ -41,6 +43,13 @@ app.controller('appCtrl', function($scope, $http, $timeout, $sce, localStorageSe
             //     if(i==response.data.length-1)
             //         $scope.posts = tmpArray;
             // }
+            for (var i = 0; i < response.data.length; i++) {
+                $scope.numOfWords += response.data[i].title.split(" ").length;
+                if(response.data[i].subtitle)
+                    $scope.numOfWords += response.data[i].subtitle.split(" ").length;
+                $scope.numOfWords += response.data[i].text.split(" ").length;
+            }
+
             $scope.loading = false;
             $scope.posts = response.data;
         }, function (response) {
