@@ -10,6 +10,7 @@ app.controller('appCtrl', function($scope, $http, $timeout, $sce, localStorageSe
     $scope.posts = [];
     $scope.noTimes = 0;
     $scope.numOfWords = 0;
+    $scope.connected = localStorageService.get('connected') || false; 
 
     $scope.getNewPosts = function () {
         $http({
@@ -28,6 +29,7 @@ app.controller('appCtrl', function($scope, $http, $timeout, $sce, localStorageSe
         $scope.posts = [];
         $scope.searchKeyword = "";
         $scope.searchInput = "";
+        $scope.numOfWords = 0;
 
         // get all Posts
         $http({
@@ -115,5 +117,53 @@ app.controller('appCtrl', function($scope, $http, $timeout, $sce, localStorageSe
         $scope.noTimes = document.getElementsByClassName("highlightedText").length;
         return $scope.noTimes;
     }
+
+
+    $scope.adminLogin = function(){
+        if($scope.email=="")
+            return $scope.errorMsg = "Please Enter Valid Email";
+        if($scope.password=="")
+            return $scope.errorMsg = "Please Enter Valid Password";
+
+        console.log("Admin User "+$scope.email+" logged in");
+        var user = {
+            'email': $scope.email,
+            'password': $scope.password
+        };
+
+        // // Post - Login
+        $http({
+            url: appUrl+"adminLogin",
+            method: "POST",
+            data: {user: user},
+            headers: {"Content-Type": "application/json"}  
+        }).then(function(response) {
+            // success
+            console.log("POST - Login successfully");
+            console.log("response: "+JSON.stringify(response.data, null, 4));
+            localStorageService.set('connected', true);
+            $scope.connected = true;
+            return console.log("Connected successfully");
+        }, 
+        function(response) { // optional
+            // failed
+            console.log("Error POST");
+            $scope.errorMsg = "Password / Email Incorrect";
+        });
+    };
+
+    $scope.showPassword = function(){
+        var myEl = angular.element( document.querySelector( '#inputPassword' ) );
+        myEl.attr('type',"text");
+    };
+
+    $scope.logOut = function(){
+        console.log("Admin logged out");
+        localStorage.clear();
+        location.reload();
+        console.log("Logout Successfully");
+    };
+
+
 
 });

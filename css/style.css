@@ -163,6 +163,108 @@ input:focus {border-color: #276b64;}
 
 
 
+/* Login Form style */
+
+.loginForm {
+    max-width: 300px;
+    padding: 30px;
+    background-color: #F7F7F7;
+    margin: 0 auto;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    margin-top: -30px;
+    margin-bottom: -100px;
+    padding-bottom: 40px;
+}
+.loginForm > .img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 20px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.loginForm > form > input[type=email],
+.loginForm > form > input[type=password],
+.loginForm > form > input[type=text],
+.loginForm > form > button {
+    width: 100%;
+    display: block;
+    margin-bottom: 15px;
+    z-index: 1;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    direction: ltr;
+}
+.loginForm > form input[type="checkbox"] {
+    margin-left: 5px;
+    float: left;
+    width: 16px;
+}
+.loginForm > form > button {height: 30px; }
+.loginForm > form > button > img {margin-top: -12px;}
+.loginForm > form > input[type=email]:focus,
+.loginForm > form > input[type=password]:focus,
+.loginForm > form > input[type=text]:focus {
+    border-color: rgb(104, 145, 162, 0.5);
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 4px rgb(104, 145, 162);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 4px rgb(104, 145, 162);
+}
+.loginForm > form > .btn-signin {
+    background-color: rgb(104, 145, 162);
+    padding: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    height: 40px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    -o-transition: all 0.218s;
+    -moz-transition: all 0.218s;
+    -webkit-transition: all 0.218s;
+    transition: all 0.218s;
+    color: #fff;
+    margin-top: 15px;
+}
+.loginForm > form > .btn-signin:hover,
+.loginForm > form > .btn-signin:active,
+.loginForm > form > .btn-signin:focus {background-color: rgb(0, 174, 157);}
+
+#errMsg {
+	margin-top: -17px;
+	margin-left: 2px;
+	font-size: 13px;
+	float: left;
+	direction: ltr;
+	color: #c21212;
+}
+#statusServer {
+    float: left; 
+    margin-right: 20px;
+    margin-top: 4px;
+    margin: 4px 8px 0px 5px;
+    width: 17px;
+    height: 17px;
+}
+.loginForm > span {
+	margin-top: -12px;
+	font-size: 14px;
+	float: left;
+	direction: ltr;
+}
+
+
+
 
 
 /* Desktop design */
@@ -202,6 +304,22 @@ input:focus {border-color: #276b64;}
 		padding: 5px 4%;
 		margin-bottom: 20px;
 	}
+
+
+	.loginForm {
+		max-width: 280px;
+	    margin-top: 25px;
+	    margin-bottom: 10px;
+	}
+	.loginForm > .img-card {margin: 0 auto 10px;}
+	.loginForm > form > input[type=email],
+	.loginForm > form > input[type=password],
+	.loginForm > form > input[type=text],
+	.loginForm > form > button {margin-bottom: 10px;}
+
+	#errMsg {margin-top: -8px;}
+	.loginForm > span {margin-top: 0px;}
+	
 }
 
 

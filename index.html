@@ -18,7 +18,7 @@
 		<span>בס"ד</span>
 	</header>
 
-	<div id="wrapper">
+	<div id="wrapper" ng-show="connected">
 		<h1>אפיון מילים הומוגרפיות וחלופותיהן</h1>
 		<h2>עבודת תזה - בהנחיית ד"ר עמליה בר-און</h2>
 		<h2 class="numOfWords" ng-if="numOfWords!=0">סה"כ מילים: {{numOfWords}}</h2>
@@ -50,8 +50,28 @@
 				<h5 ng-bind-html="highlight(post.text, searchKeyword)">{{post.text}}</h5>
 			</a>
 		</div>
-
 	</div>
+
+    <div class="loginForm" ng-show="!connected">
+        <img class="img-card" src="./img/profile-img-card.png"/>
+        <form>
+            <input type="email" name="email" ng-model="email" placeholder="Email" required autofocus>
+            <input type="password" name="password" ng-model="password" placeholder="Password" id="inputPassword" required>
+            <span id="errMsg" ng-if="errorMsg">{{errorMsg}}</span>
+            <button type="button" ng-click="showPassword()">
+            	<img src="./img/eye.png">
+            </button>
+            <div>
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button ng-click="adminLogin()" class="btn-signin" type="submit">Sign in</button>
+        </form>
+        <img id="statusServer" src="img/{{statusServer}}.gif" height="20" width="20">
+        <span>{{statusServer}}</span>
+    </div>
+
 
 </body>
 
