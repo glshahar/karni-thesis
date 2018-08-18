@@ -9,6 +9,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.5.2/angular-local-storage.min.js"></script>
     <script src="js/scriptAdmin.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>עבודת תזה - קרני שחר</title>
 </head>
 
 <body ng-controller="appCtrl">
@@ -27,10 +28,12 @@
 
 			<input type="text" name="searchKeyword" ng-model="searchInput" placeholder="הקלד מילת חיפוש כאן ...">
 			<button ng-click="searchKeywordServer()">חפש</button>
+			<button ng-click="searchKeywordRandom()">רנדומלי</button>
 
 			<h5 ng-show="!loading">
-				<span ng-show="searchKeyword">"{{searchKeyword}}" מופיע ב-</span>
-				{{posts.length}} כתבות שונות,  סה"כ : {{numberOfTimes()}} פעמים
+				<span ng-show="searchKeyword&&searchOn">"{{searchKeyword}}" מופיע ב-</span>
+				<span ng-show="searchOn">{{posts.length}} כתבות שונות,  סה"כ : {{numberOfTimes()}} פעמים</span>
+				<span ng-show="searchRandom">"{{searchKeyword}}" מתוך 100 תוצאות רנדומליות</span>
 			</h5>
 
 			<img src="./img/loading.gif" ng-show="loading">
@@ -39,17 +42,32 @@
 			<button ng-click="getAllPosts()" class="left">Get All Posts</button>
 
 		</div>
+
 		<div class="post" ng-repeat="post in posts track by $index" ng-show="post.title">
 			<a ng-href="{{post.url}}" target="_blank">
 				<h6>{{post.date}}</h6>
 				<div class="postSrc">
 					<img ng-src="./img/{{post.name}}.png">
 				</div>
+				<h3>{{$index+1}}</h3>
 				<h3 ng-bind-html="highlight(post.title, searchKeyword)">{{post.title}}</h3>
 				<h4 ng-bind-html="highlight(post.subtitle, searchKeyword)">{{post.subtitle}}</h4>
 				<h5 ng-bind-html="highlight(post.text, searchKeyword)">{{post.text}}</h5>
 			</a>
 		</div>
+
+		<div class="post" ng-repeat="post in randPosts track by $index" ng-show="post.title">
+			<a ng-href="{{post.url}}" target="_blank">
+				<h6>{{post.date}}</h6>
+				<div class="postSrc">
+					<img ng-src="./img/{{post.name}}.png">
+				</div>
+				<h3 ng-bind-html="highlightOnce(post.title, searchKeyword)">{{post.title}}</h3>
+				<h4 ng-bind-html="highlightOnce(post.subtitle, searchKeyword)">{{post.subtitle}}</h4>
+				<h5 ng-bind-html="highlightOnce(post.text, searchKeyword)">{{post.text}}</h5>
+			</a>
+		</div>
+
 	</div>
 
     <div class="loginForm" ng-show="!connected">
